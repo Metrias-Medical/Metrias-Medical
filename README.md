@@ -19,42 +19,40 @@ This is the single-page marketing website for Metrias Medical.
 └── README.md       # This file
 ```
 
-## Deployment & Domain Configuration
+## Deployment Guide: GitHub Pages
 
 ### 1. Push to GitHub
 
-Since you have GitHub Desktop:
+1. Open **GitHub Desktop**.
+2. Click **"Publish repository"** (top right).
+3. Name it `metrias-medical-site`.
+4. **Important**: Uncheck "Keep this code private" (unless you have GitHub Pro, Pages requires a public repo for the free tier).
+5. Click **Publish**.
 
-1. Open GitHub Desktop.
-2. You will see the commits in the history.
-3. Click **"Publish repository"** in the top right.
-4. Name the repository (e.g., `metrias-medical-site`).
-5. Click **Publish Repository**.
+### 2. Activate GitHub Pages
 
-### 2. Deployment Options
+1. Go to your new repository on GitHub.com (`https://github.com/[your-username]/metrias-medical-site`).
+2. Click **Settings** (top tab).
+3. On the left sidebar, click **Pages**.
+4. Under **"Build and deployment"** > **Branch**, select `main` and ensure folder is `/(root)`.
+5. Click **Save**.
 
-#### Option A: Netlify (Easiest DNS)
+*Within 1-2 minutes, your site will be live at `[your-username].github.io/metrias-medical-site`.*
 
-1. Log in to [Netlify](https://www.netlify.com/).
-2. Click **"Add new site"** > **"Import an existing project"**.
-3. Select **GitHub** and choose your `metrias-medical-site` repo.
-4. **Build Settings**: Leave blank. Click **Deploy**.
-5. Once deployed, go to **Domain management** > **Add custom domain**.
-6. Enter `metriasmedical.com`.
-7. Netlify will give you a CNAME (e.g., `metrias-medical.netlify.app`). Update your registrar's DNS to point `@` and `www` to this address.
+### 3. Connect Custom Domain (metriasmedical.com)
 
-#### Option B: GitHub Pages (Free, Built-in)
+1. On that same **Settings > Pages** screen, scroll down to **Custom domain**.
+2. Type `metriasmedical.com` and click **Save**.
+3. GitHub will check for DNS records. It will tell you to add specific **A records** to your registrar (Godaddy/Namecheap/etc).
 
-1. In your repository on GitHub.com, go to **Settings** > **Pages**.
-2. Under "Build and deployment", select **Source** as `Deploy from a branch`.
-3. Select branch: `main` / folder: `/(root)`. Click **Save**.
-4. In "Custom domain", enter `metriasmedical.com` and click **Save**.
-5. GitHub will provide DNS instructions (usually creating A records to GitHub's IPs and a CNAME for www).
+**DNS Records to Add at Registrar:**
 
-#### Option C: Cloudflare Pages (Fastest Global CDN)
+| Type | Name | Value |
+|------|------|-------|
+| A    | @    | 185.199.108.153 |
+| A    | @    | 185.199.109.153 |
+| A    | @    | 185.199.110.153 |
+| A    | @    | 185.199.111.153 |
+| CNAME| www  | `[your-username].github.io` |
 
-*See previous instructions if you prefer Cloudflare's performance features.*
-
-## Local Development
-
-Since this is a static site, you can view it by simply opening `index.html` in your web browser. No server or build process is required.
+4. Once you add these at your registrar, wait 5-10 mins, then check **"Enforce HTTPS"** in GitHub Pages settings to secure the site.
