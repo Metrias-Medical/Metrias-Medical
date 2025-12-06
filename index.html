@@ -7,7 +7,7 @@
     <title>Metrias Medical | The Execution Layer for Hospital Discharge</title>
     <meta name="description"
         content="Metrias Medical provides dedicated expeditors and AI task tracking to solve hospital discharge delays. We are the bandwidth your team doesn't have.">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="favicon_universal.svg">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -162,10 +162,25 @@
             font-size: 0.95rem;
             font-weight: 500;
             color: var(--color-navy);
+            position: relative;
         }
 
         nav a:hover {
             color: var(--color-gold);
+        }
+
+        .nav-link-employer {
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+
+        .nav-link-hospital {
+            /* Keep navy but add a subtle bottom border or distinct style */
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-link-hospital:hover {
+            border-bottom-color: var(--color-navy);
         }
 
         /* Mobile Nav Toggle (Simple Implementation) */
@@ -494,21 +509,22 @@
     <!-- Navigation -->
     <header>
         <div class="container nav-container">
-            <a href="#" class="logo">
-                <img src="logo_mark.svg" alt="Metrias Logo">
-                Metrias Medical
-            </a>
+            <div class="logo-wrapper" style="display: flex; flex-direction: column; align-items: flex-start;">
+                <a href="#" class="logo">
+                    <img src="logo_mark.svg" alt="Metrias Logo">
+                    Metrias Medical
+                </a>
+                <span class="tagline"
+                    style="font-size: 13px; color: #6b7280; margin-left: 42px; margin-top: -4px; line-height: 1;">Discharge
+                    Execution Service</span>
+            </div>
 
             <!-- Mobile Toggle (placeholder logic) -->
             <!-- Note: No JS requested unless essential. We can use anchor scrolling for nav. 
                  Since "hamburger only if essential", and we have 4 items, let's try to fit them or simple stack.
                  For strict NO JS, we can't do a togglable hamburger easily without checkbox hack.
                  Given "prefer visible text links if they fit", on mobile we might just show them stacked or smaller.
-                 Let's stick to the request: "Collapse nav to hamburger only if essential".
-                 I will hide nav on mobile and rely on the page scroll buttons for main actions, 
-                 and maybe a simple footer nav or just let users scroll. 
-                 However, to be safe, I'll add a simple JS snippet for mobile menu toggle if the user taps it. 
-                 The prompt said "no JavaScript unless essential". A mobile menu is often essential. -->
+                 Let's stick to the request: "No JavaScript unless essential". A mobile menu is often essential. -->
             <div class="mobile-menu-toggle"
                 onclick="document.querySelector('nav ul').style.display = document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex'; document.querySelector('nav ul').style.flexDirection = 'column'; document.querySelector('nav ul').style.position = 'absolute'; document.querySelector('nav ul').style.top = '70px'; document.querySelector('nav ul').style.right = '0'; document.querySelector('nav ul').style.background = 'white'; document.querySelector('nav ul').style.padding = '1rem'; document.querySelector('nav ul').style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)'; document.querySelector('nav ul').style.width = '100%';">
                 ☰
@@ -516,8 +532,8 @@
 
             <nav>
                 <ul>
-                    <li><a href="#employers">For Employers</a></li>
-                    <li><a href="#hospitals">For Hospitals</a></li>
+                    <li><a href="#employers" class="nav-link-employer">For Employers</a></li>
+                    <li><a href="#hospitals" class="nav-link-hospital">For Hospitals</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -649,7 +665,8 @@
             </p>
 
             <div class="founder-block">
-                <div class="founder-img">MD</div>
+                <img src="headshot.png" alt="Mene Demestihas, MD" class="founder-img"
+                    style="object-fit: cover; border: 2px solid var(--color-navy);">
                 <div class="founder-info">
                     <h4>Mene Demestihas, MD</h4>
                     <p>Emergency Physician · Former Health Tech CMO · Founder</p>
@@ -664,7 +681,7 @@
         <div class="container">
             <div class="contact-form">
                 <h2 class="section-header" style="margin-bottom: 1.5rem; text-align: center;">Start a Conversation</h2>
-                <form name="contact" method="POST" data-netlify="true">
+                <form id="contact-form" onsubmit="event.preventDefault(); sendMail();">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" class="form-control" required>
@@ -685,7 +702,7 @@
                     <button type="submit" class="btn btn-full-width">Send</button>
 
                     <div class="contact-email">
-                        Or email directly: <a href="mailto:mene@metriasmedical.com">mene@metriasmedical.com</a>
+                        Or email directly: <a href="mailto:connect@metriasmedical.com">connect@metriasmedical.com</a>
                     </div>
                 </form>
             </div>
@@ -699,6 +716,19 @@
             <p style="font-size: 0.75rem;">Metrias Medical is building the execution layer for hospital discharge.</p>
         </div>
     </footer>
+
+    <script>
+        function sendMail() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const interest = document.getElementById('interest').value;
+
+            const subject = `Metrias Inquiry — ${interest}`;
+            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AInterest: ${interest}%0D%0A%0D%0A(Add your message here)`;
+
+            window.location.href = `mailto:connect@metriasmedical.com?subject=${subject}&body=${body}`;
+        }
+    </script>
 
 </body>
 
