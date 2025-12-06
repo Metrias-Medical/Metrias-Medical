@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metrias Medical | The Execution Layer for Hospital Discharge</title>
+    <meta name="description"
+        content="Metrias Medical provides dedicated expeditors and AI task tracking to solve hospital discharge delays. We are the bandwidth your team doesn't have.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://metriasmedical.com/">
+    <meta property="og:title" content="Metrias Medical | Hospital Discharge Solutions">
+    <meta property="og:description"
+        content="Discharge delays are a $100 billion problem. Metrias deploys remote expeditors to clear non-clinical bottlenecks.">
+    <meta property="og:image" content="https://metriasmedical.com/favicon.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://metriasmedical.com/">
+    <meta property="twitter:title" content="Metrias Medical | Hospital Discharge Solutions">
+    <meta property="twitter:description"
+        content="Discharge delays are a $100 billion problem. Metrias deploys remote expeditors to clear non-clinical bottlenecks.">
+    <meta property="twitter:image" content="https://metriasmedical.com/favicon.png">
+
+    <style>
+        /* Variables */
+        :root {
+            --color-navy: #253780;
+            /* Official SVG Navy */
+            --color-gold: #DEAC31;
+            /* Official SVG Gold */
+            --color-gold-hover: #C89B2B;
+            /* Official SVG Secondary/Shadow Gold */
+            --color-white: #ffffff;
+            --color-bg-light: #f3f4f6;
+            --color-text-body: #1e1e1e;
+            --color-text-header: #253780;
+            --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --spacing-unit: 1rem;
+            --container-width: 1200px;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--color-text-body);
+            line-height: 1.6;
+            font-size: 16px;
+            /* Base size */
+            background-color: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: var(--color-text-header);
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--color-text-body);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s ease;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Utilities */
+        .container {
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .section-padding {
+            padding: 4rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 6rem 0;
+            }
+        }
+
+        /* Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--color-navy);
+            display: flex;
+            align-items: center;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span {
+            color: var(--color-text-body);
+            font-weight: 400;
+            margin-left: 0.5rem;
+            /* Optional spacing if we split 'Metrias Medical' */
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+            margin-right: 0.75rem;
+        }
+
+        nav ul {
+            display: none;
+            /* Mobile hidden mainly, or hamburger */
+            list-style: none;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            nav ul {
+                display: flex;
+            }
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-navy);
+        }
+
+        nav a:hover {
+            color: var(--color-gold);
+        }
+
+        /* Mobile Nav Toggle (Simple Implementation) */
+        .mobile-menu-toggle {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--color-navy);
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu-toggle {
+                display: none;
+            }
+        }
+
+        /* Hero Section */
+        #hero {
+            background-color: var(--color-white);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        #hero h1 {
+            font-size: 2.5rem;
+            letter-spacing: -0.03em;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            #hero h1 {
+                font-size: 3.5rem;
+            }
+
+            #hero {
+                padding-top: 6rem;
+                padding-bottom: 6rem;
+            }
+        }
+
+        .subhead {
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            color: var(--color-text-body);
+        }
+
+        @media (min-width: 768px) {
+            .subhead {
+                font-size: 1.25rem;
+            }
+        }
+
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .cta-group {
+                flex-direction: row;
+                gap: 1.5rem;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--color-gold);
+            color: var(--color-navy);
+            font-weight: 600;
+            padding: 0.875rem 2rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .btn:hover {
+            background-color: var(--color-gold-hover);
+        }
+
+        .btn-full-width {
+            width: 100%;
+        }
+
+        .founder-cred {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        /* Sections */
+        .section-header {
+            font-size: 1.875rem;
+            color: var(--color-navy);
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .section-subhead {
+            font-size: 1.25rem;
+            color: var(--color-navy);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        @media (min-width: 768px) {
+            .section-header {
+                font-size: 2.25rem;
+            }
+        }
+
+        /* Problem Section */
+        #problem {
+            background-color: var(--color-bg-light);
+        }
+
+        .content-block {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .center-text {
+            text-align: center;
+        }
+
+        .center-text .section-header {
+            text-align: center;
+        }
+
+        /* Employer & Hospital Sections */
+        .audience-section {
+            background-color: var(--color-white);
+        }
+
+        .audience-section:nth-of-type(even) {
+            background-color: var(--color-bg-light);
+        }
+
+        .audience-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .proof-points {
+            margin-top: 1.5rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--color-gold);
+            font-style: italic;
+            color: var(--color-text-body);
+        }
+
+        /* How It Works */
+        #model {
+            background-color: var(--color-navy);
+            color: var(--color-white);
+        }
+
+        #model .section-header {
+            color: var(--color-white);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .model-col h3 {
+            color: var(--color-gold);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .model-col p {
+            color: #d1d5db;
+            /* Light gray for dark background */
+        }
+
+        /* About Section */
+        #about {
+            background-color: var(--color-white);
+        }
+
+        .founder-block {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .founder-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #9ca3af;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .founder-info h4 {
+            margin-bottom: 0.25rem;
+            color: var(--color-navy);
+        }
+
+        .founder-info p {
+            margin-bottom: 0.25rem;
+            font-size: 0.875rem;
+            color: var(--color-text-body);
+        }
+
+        .founder-info a {
+            font-size: 0.875rem;
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: var(--color-bg-light);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--color-white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--color-navy);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-navy);
+            ring: 1px solid var(--color-navy);
+        }
+
+        .contact-email {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .contact-email a {
+            color: var(--color-navy);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-navy);
+            color: #9ca3af;
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            color: #9ca3af;
+        }
+
+        /* Utility */
+        .hidden-mobile {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .hidden-mobile {
+                display: inline;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="logo_mark.svg" alt="Metrias Logo">
+                Metrias Medical
+            </a>
+
+            <!-- Mobile Toggle (placeholder logic) -->
+            <!-- Note: No JS requested unless essential. We can use anchor scrolling for nav. 
+                 Since "hamburger only if essential", and we have 4 items, let's try to fit them or simple stack.
+                 For strict NO JS, we can't do a togglable hamburger easily without checkbox hack.
+                 Given "prefer visible text links if they fit", on mobile we might just show them stacked or smaller.
+                 Let's stick to the request: "Collapse nav to hamburger only if essential".
+                 I will hide nav on mobile and rely on the page scroll buttons for main actions, 
+                 and maybe a simple footer nav or just let users scroll. 
+                 However, to be safe, I'll add a simple JS snippet for mobile menu toggle if the user taps it. 
+                 The prompt said "no JavaScript unless essential". A mobile menu is often essential. -->
+            <div class="mobile-menu-toggle"
+                onclick="document.querySelector('nav ul').style.display = document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex'; document.querySelector('nav ul').style.flexDirection = 'column'; document.querySelector('nav ul').style.position = 'absolute'; document.querySelector('nav ul').style.top = '70px'; document.querySelector('nav ul').style.right = '0'; document.querySelector('nav ul').style.background = 'white'; document.querySelector('nav ul').style.padding = '1rem'; document.querySelector('nav ul').style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)'; document.querySelector('nav ul').style.width = '100%';">
+                ☰
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="#employers">For Employers</a></li>
+                    <li><a href="#hospitals">For Hospitals</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- SECTION 1: Hero -->
+    <section id="hero">
+        <div class="container">
+            <h1>Discharge delays are a $100 billion problem. Dashboards won't fix it.</h1>
+            <p class="subhead">
+                Metrias deploys remote expeditors — supported by AI task tracking — to clear the non-clinical
+                bottlenecks that keep patients stuck in beds. We're not software. We're the bandwidth your team doesn't
+                have.
+            </p>
+            <div class="cta-group">
+                <a href="#employers" class="btn">For Employers</a>
+                <a href="#hospitals" class="btn">For Hospitals</a>
+            </div>
+            <p class="founder-cred">Founded by Mene Demestihas, MD — Emergency Physician & Former Health Tech CMO</p>
+        </div>
+    </section>
+
+    <!-- SECTION 2: The Problem -->
+    <section id="problem" class="section-padding">
+        <div class="container content-block center-text">
+            <h2 class="section-header">The Execution Gap</h2>
+            <p>
+                Hospital case managers are drowning. The average SNF referral acceptance rate is 37% — meaning your team
+                sends nearly seven referrals to place one patient. Prior authorization delays add 2+ days to rehab
+                transfers. The dashboards flag these problems. Nobody has bandwidth to fix them.
+            </p>
+            <p>
+                Existing solutions predict delays. Metrias resolves them. Our expeditors make the calls, chase the
+                authorizations, and grind through rejection lists until the patient moves. We capture every barrier and
+                intervention in structured data — building the attribution layer that proves what worked.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 3: For Employers -->
+    <section id="employers" class="section-padding audience-section">
+        <div class="container audience-content">
+            <h2 class="section-header">For Self-Insured Employers</h2>
+            <h3 class="section-subhead">Every extra hospital day costs you $2,500–$4,000. We get your people home
+                faster.</h3>
+            <p>
+                When your employees are hospitalized, you pay per diem. Discharge delays aren't just a patient
+                experience problem — they're a direct hit to your benefits spend. Metrias acts as a concierge discharge
+                service for your covered lives, embedded in hospital workflows to accelerate safe transitions home.
+            </p>
+            <p>
+                Unlike telephonic navigators who call after the fact, we're inside the clinical workflow — coordinating
+                with hospitalists, case managers, and post-acute facilities in real time.
+            </p>
+            <div class="proof-points">
+                Currently validating with mid-size health systems. ROI model built on peer-reviewed LOS data. Targeting
+                0.5+ day reduction per intervention — $1,250+ savings per case at conservative estimates.
+            </div>
+            <div style="margin-top: 2rem;">
+                <a href="#contact" class="btn">Talk to Us About Your Plan</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: For Hospitals -->
+    <section id="hospitals" class="section-padding audience-section">
+        <div class="container audience-content">
+            <h2 class="section-header">For Capacity-Constrained Systems</h2>
+            <h3 class="section-subhead">If your ED is boarding admits, every blocked bed costs you $15,000+ in lost DRG
+                revenue.</h3>
+            <p>
+                At 85%+ occupancy, discharge delays aren't about saving money — they're about survival. Patients
+                boarding in the ED cost nearly double what they'd cost on the floor. Surgical cases get cancelled.
+                Ambulances divert.
+            </p>
+            <p>
+                Metrias provides dedicated expeditor bandwidth to your case management team. We take the non-clinical
+                logistics off their plates — SNF placement calls, transport coordination, DME orders, prior auth
+                follow-up — so your licensed staff can focus on complex clinical transitions.
+            </p>
+            <div class="proof-points">
+                Designed for 200+ bed systems at capacity. 30 mock coordination workflows validated. No EHR integration
+                required to start — we operate via secure virtual rounding.
+            </div>
+            <div style="margin-top: 2rem;">
+                <a href="#contact" class="btn">Discuss a Pilot</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: How It Works -->
+    <section id="model" class="section-padding">
+        <div class="container">
+            <h2 class="section-header">The Model</h2>
+            <div class="grid-3">
+                <div class="model-col">
+                    <h3>Expeditors</h3>
+                    <p>Trained medical assistants dedicated to discharge logistics. They make the calls your case
+                        managers can't get to.</p>
+                </div>
+                <div class="model-col">
+                    <h3>AI Task Engine</h3>
+                    <p>Every barrier, intervention, and resolution is captured in structured data. We build the audit
+                        trail that proves what worked.</p>
+                </div>
+                <div class="model-col">
+                    <h3>Attribution Layer</h3>
+                    <p>Payer-grade documentation of LOS impact. Designed to survive actuarial scrutiny for shared
+                        savings models.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: About / Founder -->
+    <section id="about" class="section-padding">
+        <div class="container content-block">
+            <h2 class="section-header">About Metrias</h2>
+            <p>
+                Metrias Medical was founded to solve a problem I saw every shift in the emergency department: patients
+                ready to leave, stuck waiting for a fax, a callback, a bed that wouldn't open. The dashboards told us
+                what was wrong. Nobody had time to fix it.
+            </p>
+            <p>
+                I built Metrias to be the execution layer — the bandwidth hospitals need but can't hire, aligned with
+                the payers who actually benefit from efficiency.
+            </p>
+
+            <div class="founder-block">
+                <div class="founder-img">MD</div>
+                <div class="founder-info">
+                    <h4>Mene Demestihas, MD</h4>
+                    <p>Emergency Physician · Former Health Tech CMO · Founder</p>
+                    <a href="https://linkedin.com/in/menedemestihas" target="_blank">LinkedIn Profile &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: Contact -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="contact-form">
+                <h2 class="section-header" style="margin-bottom: 1.5rem; text-align: center;">Start a Conversation</h2>
+                <form name="contact" method="POST" data-netlify="true">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">I'm interested in...</label>
+                        <select id="interest" name="interest" class="form-control">
+                            <option value="Employer/Benefits">Employer/Benefits</option>
+                            <option value="Hospital Operations">Hospital Operations</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-full-width">Send</button>
+
+                    <div class="contact-email">
+                        Or email directly: <a href="mailto:mene@metriasmedical.com">mene@metriasmedical.com</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Metrias Medical</p>
+            <p style="font-size: 0.75rem;">Metrias Medical is building the execution layer for hospital discharge.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
