@@ -120,7 +120,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px;
+            height: 90px;
         }
 
         .logo {
@@ -140,7 +140,7 @@
         }
 
         .logo img {
-            height: 32px;
+            height: 48px;
             width: auto;
             margin-right: 0.75rem;
         }
@@ -159,7 +159,7 @@
         }
 
         nav a {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             font-weight: 500;
             color: var(--color-navy);
             position: relative;
@@ -463,7 +463,7 @@
         .form-control:focus {
             outline: none;
             border-color: var(--color-navy);
-            ring: 1px solid var(--color-navy);
+            box-shadow: 0 0 0 3px rgba(37, 55, 128, 0.1);
         }
 
         .contact-email {
@@ -510,7 +510,8 @@
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">
-                <img src="logo_full.svg" alt="Metrias Medical Logo" style="height: 50px; width: auto;">
+                <img src="Metrias Medical _ Horizontal + tagline.png" alt="Metrias Medical Logo"
+                    style="height: 75px; width: auto;">
             </a>
 
             <!-- Mobile Toggle (placeholder logic) -->
@@ -520,13 +521,12 @@
                  Given "prefer visible text links if they fit", on mobile we might just show them stacked or smaller.
                  Let's stick to the request: "No JavaScript unless essential". A mobile menu is often essential. -->
             <div class="mobile-menu-toggle"
-                onclick="document.querySelector('nav ul').style.display = document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex'; document.querySelector('nav ul').style.flexDirection = 'column'; document.querySelector('nav ul').style.position = 'absolute'; document.querySelector('nav ul').style.top = '70px'; document.querySelector('nav ul').style.right = '0'; document.querySelector('nav ul').style.background = 'white'; document.querySelector('nav ul').style.padding = '1rem'; document.querySelector('nav ul').style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)'; document.querySelector('nav ul').style.width = '100%';">
+                onclick="document.querySelector('nav ul').style.display = document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex'; document.querySelector('nav ul').style.flexDirection = 'column'; document.querySelector('nav ul').style.position = 'absolute'; document.querySelector('nav ul').style.top = '90px'; document.querySelector('nav ul').style.right = '0'; document.querySelector('nav ul').style.background = 'white'; document.querySelector('nav ul').style.padding = '1rem'; document.querySelector('nav ul').style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)'; document.querySelector('nav ul').style.width = '100%';">
                 ☰
             </div>
 
             <nav>
                 <ul>
-                    <li><a href="#employers" class="nav-link-employer">For Employers</a></li>
                     <li><a href="#hospitals" class="nav-link-hospital">For Hospitals</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -543,10 +543,9 @@
                 Metrias deploys remote expeditors, supported by AI task tracking, to clear the non-clinical bottlenecks
                 that keep patients stuck in beds. We're not software. We're the bandwidth your team doesn't have.
             </p>
-            <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">Advised by former health system COOs and
-                payer medical directors.</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">Built by a team of healthcare executives
+                with diverse backgrounds.</p>
             <div class="cta-group">
-                <a href="#employers" class="btn">For Employers</a>
                 <a href="#hospitals" class="btn">For Hospitals</a>
             </div>
             <p class="founder-cred">Founded by Mene Demestihas, MD | Emergency Physician & Health Tech Executive</p>
@@ -558,8 +557,9 @@
         <div class="container content-block center-text">
             <h2 class="section-header">The Execution Gap</h2>
             <p>
-                Hospital case managers are drowning. The average SNF referral acceptance rate is 57%, meaning your team
-                sends nearly seven referrals to place one patient. Prior authorization delays add 2+ days to rehab
+                Hospital case managers are drowning. The average SNF referral acceptance rate hovers around 32%, meaning
+                your team
+                sends an average of 6.6 referrals to place one patient. Prior authorization delays add 2+ days to rehab
                 transfers. The dashboards flag these problems. Nobody has bandwidth to fix them.
             </p>
             <p>
@@ -570,42 +570,17 @@
         </div>
     </section>
 
-    <!-- SECTION 3: For Employers -->
-    <section id="employers" class="section-padding audience-section">
-        <div class="container audience-content">
-            <h2 class="section-header">For Self-Insured Employers</h2>
-            <h3 class="section-subhead">Every extra hospital day costs you $2,500–$4,000. We get your people home
-                faster.</h3>
-            <p>
-                When your employees are hospitalized, you pay per diem. Discharge delays aren't just a patient
-                experience problem; they're a direct hit to your benefits spend. Metrias acts as a concierge discharge
-                service for your covered lives, embedded in hospital workflows to accelerate safe transitions home.
-            </p>
-            <p>
-                Unlike telephonic navigators who call from outside the system, we're inside the discharge workflow,
-                coordinating with hospitalists, case managers, and post-acute facilities in real time. We're not asking
-                hospitals to pay for efficiency. We're proving savings to the payers who bear the cost.
-            </p>
-            <div class="proof-points">
-                Currently in structured pilot design with mid-size health systems.
-                <!-- // TODO: Update to 'Pilot partner signed' or 'Initial deployment: Q1 2025' once LOI received -->
-                ROI models built on peer-reviewed LOS data. Targeting 0.5+ day reduction per intervention, translating
-                to $1,250+ savings per case at conservative estimates.
-            </div>
-            <div style="margin-top: 2rem;">
-                <a href="#contact" class="btn">Talk to Us About Your Plan</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- SECTION 4: For Hospitals -->
+
+    <!-- SECTION 3: For Hospitals -->
     <section id="hospitals" class="section-padding audience-section">
         <div class="container audience-content">
             <h2 class="section-header">For Capacity-Constrained Systems</h2>
-            <h3 class="section-subhead">If your ED is boarding admits, every blocked bed costs $8,000 to $15,000 in lost
-                contribution margin, depending on service line.*</h3>
-            <p style="font-size: 0.8em; margin-top: -10px; margin-bottom: 20px;">*(Range reflects medical vs. surgical
-                service lines; KFF 2024)</p>
+            <h3 class="section-subhead">If your ED is boarding admits, every blocked bed costs $14,500 to $20,000 in
+                lost
+                daily revenue from capacity constraints.*</h3>
+            <p style="font-size: 0.8em; margin-top: -10px; margin-bottom: 20px;">*(Reflects opportunity cost of ED
+                boarding and surgical case delays; VanPelt Company 2024)</p>
             <p>
                 At 85%+ occupancy, discharge delays aren't about saving money. They're about survival. Patients boarding
                 in the ED cost nearly double what they'd cost on the floor. Surgical cases get canceled. Ambulances
@@ -617,24 +592,37 @@
                 follow-up, so your licensed staff can focus on complex clinical transitions.
             </p>
             <div class="proof-points">
-                Designed for 200+ bed systems at capacity. Demo mock coordination workflows validated. Operates
-                alongside your EHR via secure virtual rounding. Integration available for high-volume deployments.
-                US-based expeditors trained in hospital discharge workflows.
+                Pilot methodology validated through mock coordination workflows. Seeking hospital partners for initial
+                deployment.
+                Designed for 200+ bed systems at capacity. Operates alongside your EHR via secure virtual rounding.
+                Integration available for high-volume deployments. US-based nonclinical Expeditors trained in hospital
+                discharge workflows.
             </div>
+            <p style="margin-top: 2rem;">
+                <strong>Why capacity matters:</strong> Discharge optimization only pencils out when freed beds get
+                refilled.
+                We focus on systems where throughput is the binding constraint—not facilities with empty hallways.
+                Hospitals with excess capacity and high per-diem commercial payer mix may not see ROI from LOS reduction
+                alone.
+                Metrias specifically targets capacity-constrained facilities (85%+ occupancy, ED boarding, ambulance
+                diversion)
+                where throughput directly converts to revenue. This is where the math works for everyone: hospital,
+                patient, and payer.
+            </p>
             <div style="margin-top: 2rem;">
                 <a href="#contact" class="btn">Discuss a Pilot</a>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 5: How It Works -->
+    <!-- SECTION 4: How It Works -->
     <section id="model" class="section-padding">
         <div class="container">
             <h2 class="section-header">The Model</h2>
             <div class="grid-3">
                 <div class="model-col">
                     <h3>Expeditors</h3>
-                    <p>Trained medical associates dedicated to discharge logistics. They make the calls your case
+                    <p>Trained nonclinical Expeditors dedicated to discharge logistics. They make the calls your case
                         managers can't get to.</p>
                 </div>
                 <div class="model-col">
@@ -648,6 +636,33 @@
                         savings models.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: AI Behind The Scenes -->
+    <section class="section-padding" style="background-color: var(--color-bg-light);">
+        <div class="container content-block">
+            <h2 class="section-header" style="text-align: center;">AI Behind The Scenes</h2>
+            <p
+                style="text-align: center; font-size: 1.125rem; font-weight: 600; color: var(--color-navy); margin-bottom: 2rem;">
+                Human-first for fast deployment. AI-native for long-term scale.
+            </p>
+            <p>
+                Metrias is designed for immediate adoption with zero IT integration required at launch.
+                Human Expeditors handle all coordination tasks from day one—no complex implementations, no workflow
+                disruptions.
+            </p>
+            <p>
+                Behind the scenes, every interaction generates structured operational data. This data builds the
+                attribution layer
+                that proves intervention impact, creating a foundation that gets smarter with each case.
+            </p>
+            <p>
+                Over time, AI automation increases efficiency without changing the hospital's workflow. The service you
+                see stays
+                the same. The intelligence powering it gets better. Your team gets results faster, with the same level
+                of support.
+            </p>
         </div>
     </section>
 
@@ -738,7 +753,6 @@
                     <div class="form-group">
                         <label for="interest">I'm interested in...</label>
                         <select id="interest" name="interest" class="form-control">
-                            <option value="Employer/Benefits">Employer/Benefits</option>
                             <option value="Hospital Operations">Hospital Operations</option>
                             <option value="Partnership">Partnership</option>
                             <option value="Other">Other</option>
