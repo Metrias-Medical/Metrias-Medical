@@ -25,22 +25,34 @@
         content="Discharge delays are a $100 billion problem. Metrias deploys remote expeditors to clear non-clinical bottlenecks.">
     <meta property="twitter:image" content="https://metriasmedical.com/og-image.png">
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Fraunces:opsz,wght@9..144,300;400;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
         /* Variables */
         :root {
             --color-navy: #253780;
-            /* Official SVG Navy */
+            --color-navy-dark: #1a2656;
+            --color-navy-light: #344bb1;
             --color-gold: #DEAC31;
-            /* Official SVG Gold */
-            --color-gold-hover: #C89B2B;
-            /* Official SVG Secondary/Shadow Gold */
+            --color-gold-light: #ebd08d;
             --color-white: #ffffff;
-            --color-bg-light: #f3f4f6;
-            --color-text-body: #1e1e1e;
+            --color-sand: #F8F7F5;
+            /* Warm off-white */
+            --color-text-body: #2C2C2C;
+            --color-text-muted: #555555;
             --color-text-header: #253780;
-            --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+            --font-display: 'Fraunces', serif;
+            --font-body: 'DM Sans', sans-serif;
+
             --spacing-unit: 1rem;
-            --container-width: 1200px;
+            --container-width: 1280px;
+            --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         /* Reset & Base Styles */
@@ -50,14 +62,18 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: var(--font-family);
+            font-family: var(--font-body);
             color: var(--color-text-body);
             line-height: 1.6;
             font-size: 18px;
-            /* Base size */
-            background-color: var(--color-white);
+            background-color: var(--color-sand);
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         h1,
@@ -66,21 +82,33 @@
         h4,
         h5,
         h6 {
-            color: var(--color-text-header);
+            font-family: var(--font-display);
+            color: var(--color-navy);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 3rem;
             font-weight: 700;
-            line-height: 1.25;
-            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
         }
 
         p {
             margin-bottom: 1.5rem;
             color: var(--color-text-body);
+            max-width: 65ch;
         }
 
         a {
             text-decoration: none;
             color: inherit;
-            transition: color 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         img {
@@ -94,33 +122,117 @@
             max-width: var(--container-width);
             margin: 0 auto;
             padding: 0 var(--spacing-unit);
+            position: relative;
         }
 
         .section-padding {
-            padding: 4rem 0;
+            padding: 6rem 0;
         }
 
         @media (min-width: 768px) {
             .section-padding {
-                padding: 6rem 0;
+                padding: 8rem 0;
             }
+
+            h1 {
+                font-size: 4rem;
+                letter-spacing: -0.03em;
+            }
+
+            h2 {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Texture Overlay */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Animated Reveals */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+        }
+
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+
+        .delay-300 {
+            transition-delay: 300ms;
         }
 
         /* Navigation */
         header {
-            position: sticky;
+            position: fixed;
             top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color 0.3s ease, padding 0.3s ease;
+            padding: 1.5rem 0;
+        }
+
+        header.scrolled {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid #e5e7eb;
-            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+        }
+
+        header.scrolled .nav-link {
+            color: var(--color-navy);
+        }
+
+        /* Initial state: clear header over navy hero */
+        header:not(.scrolled) {
+            background: transparent;
+        }
+
+        header:not(.scrolled) .logo span,
+        header:not(.scrolled) .nav-link,
+        header:not(.scrolled) .mobile-menu-toggle {
+            color: var(--color-white);
+        }
+
+        /* But wait, if we have a light page below hero, text needs to be dark?
+           Actually sticky header usually turns white/opaque. 
+           Let's default to white/opaque immediately for simplicity and readability 
+           unless we want a strictly transparent hero header. 
+           Given the redesign request "Header... Use existing site header", 
+           I'll stick to a polished Sticky White header for UX clarity. 
+        */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: sticky;
+            /* Back to sticky as typical */
+            padding: 1rem 0;
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 90px;
         }
 
         .logo {
@@ -130,13 +242,7 @@
             display: flex;
             align-items: center;
             letter-spacing: -0.02em;
-        }
-
-        .logo span {
-            color: var(--color-text-body);
-            font-weight: 400;
-            margin-left: 0.5rem;
-            /* Optional spacing if we split 'Metrias Medical' */
+            font-family: var(--font-display);
         }
 
         .logo img {
@@ -147,9 +253,9 @@
 
         nav ul {
             display: none;
-            /* Mobile hidden mainly, or hamburger */
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
+            align-items: center;
         }
 
         @media (min-width: 768px) {
@@ -159,31 +265,27 @@
         }
 
         nav a {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 500;
             color: var(--color-navy);
             position: relative;
         }
 
-        nav a:hover {
-            color: var(--color-gold);
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--color-gold);
+            transition: width 0.3s ease;
         }
 
-        .nav-link-employer {
-            color: var(--color-navy);
-            font-weight: 600;
+        nav a:hover::after {
+            width: 100%;
         }
 
-        .nav-link-hospital {
-            /* Keep navy but add a subtle bottom border or distinct style */
-            border-bottom: 2px solid transparent;
-        }
-
-        .nav-link-hospital:hover {
-            border-bottom-color: var(--color-navy);
-        }
-
-        /* Mobile Nav Toggle (Simple Implementation) */
         .mobile-menu-toggle {
             display: block;
             font-size: 1.5rem;
@@ -199,337 +301,362 @@
 
         /* Hero Section */
         #hero {
-            background-color: var(--color-white);
-            text-align: center;
+            background-color: var(--color-navy);
+            color: var(--color-white);
+            min-height: 90vh;
             display: flex;
             align-items: center;
+            position: relative;
+            overflow: hidden;
             padding-top: 4rem;
-            padding-bottom: 4rem;
+            /* For fixed header clearance if needed */
+        }
+
+        /* Geometric Background Pattern */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(222, 172, 49, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(222, 172, 49, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            mask-image: linear-gradient(to left, black, transparent);
+            -webkit-mask-image: linear-gradient(to left, black, transparent);
+            z-index: 0;
+        }
+
+        /* The "Flow" Element */
+        .flow-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-navy) 0%, var(--color-gold) 50%, var(--color-navy) 100%);
+            opacity: 0.8;
+            box-shadow: 0 0 20px var(--color-gold);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
         }
 
         #hero h1 {
-            font-size: 2.5rem;
-            letter-spacing: -0.03em;
-            max-width: 800px;
-            margin: 0 auto 1.5rem;
-        }
-
-        @media (min-width: 768px) {
-            #hero h1 {
-                font-size: 3.5rem;
-            }
-
-            #hero {
-                padding-top: 6rem;
-                padding-bottom: 6rem;
-            }
+            color: var(--color-white);
+            margin-bottom: 2rem;
+            line-height: 1.05;
         }
 
         .subhead {
-            font-size: 1.125rem;
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
-            color: var(--color-text-body);
-        }
-
-        @media (min-width: 768px) {
-            .subhead {
-                font-size: 1.25rem;
-            }
-        }
-
-        .cta-group {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2.5rem;
-        }
-
-        @media (min-width: 640px) {
-            .cta-group {
-                flex-direction: row;
-                gap: 1.5rem;
-            }
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            border-left: 2px solid var(--color-gold);
+            padding-left: 1.5rem;
         }
 
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             background-color: var(--color-gold);
             color: var(--color-navy);
-            font-weight: 600;
-            padding: 0.875rem 2rem;
-            border-radius: 4px;
-            font-size: 1rem;
-            border: none;
+            font-weight: 700;
+            padding: 1rem 2.5rem;
+            border-radius: 2px;
+            /* Sharper corners */
+            font-size: 1.1rem;
+            border: 1px solid var(--color-gold);
             cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             text-align: center;
-            min-width: 200px;
+            box-shadow: 0 4px 15px rgba(222, 172, 49, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: var(--font-body);
         }
 
         .btn:hover {
-            background-color: var(--color-gold-hover);
-        }
-
-        .btn-full-width {
-            width: 100%;
+            background-color: transparent;
+            color: var(--color-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(222, 172, 49, 0.4);
         }
 
         .founder-cred {
+            margin-top: 4rem;
             font-size: 0.875rem;
-            color: #6b7280;
-            font-weight: 500;
-        }
-
-        /* Sections */
-        .section-header {
-            font-size: 1.875rem;
-            color: var(--color-navy);
-            margin-bottom: 1rem;
-            text-align: left;
-        }
-
-        .section-subhead {
-            font-size: 1.25rem;
-            color: var(--color-navy);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        @media (min-width: 768px) {
-            .section-header {
-                font-size: 2.25rem;
-            }
+            color: rgba(255, 255, 255, 0.5);
+            font-family: var(--font-body);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         /* Problem Section */
         #problem {
-            background-color: var(--color-bg-light);
-        }
-
-        .content-block {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .center-text {
-            text-align: center;
-        }
-
-        .center-text .section-header {
-            text-align: center;
-        }
-
-        /* Employer & Hospital Sections */
-        .audience-section {
             background-color: var(--color-white);
         }
 
-        .audience-section:nth-of-type(even) {
-            background-color: var(--color-bg-light);
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: start;
         }
 
-        .audience-content {
-            max-width: 800px;
-            margin: 0 auto;
+        @media (min-width: 900px) {
+            .split-layout {
+                grid-template-columns: 0.8fr 1.2fr;
+            }
+
+            .sticky-header {
+                position: sticky;
+                top: 8rem;
+            }
+        }
+
+        .stat-highlight {
+            font-size: 4rem;
+            font-family: var(--font-display);
+            color: var(--color-gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-navy);
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        /* Audience Section */
+        .audience-section {
+            background-color: var(--color-sand);
+            position: relative;
         }
 
         .proof-points {
-            margin-top: 1.5rem;
-            padding-left: 1rem;
+            margin-top: 2rem;
+            padding: 2rem;
+            background-color: white;
             border-left: 4px solid var(--color-gold);
+            font-family: var(--font-display);
             font-style: italic;
-            color: var(--color-text-body);
+            font-size: 1.1rem;
+            color: var(--color-navy);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
-        /* How It Works */
+        /* The Model Section */
         #model {
             background-color: var(--color-navy);
             color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle topo map or geometric texture */
+        #model::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+            pointer-events: none;
         }
 
         #model .section-header {
             color: var(--color-white);
-            text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
-        .grid-3 {
+        .card-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
-        @media (min-width: 768px) {
-            .grid-3 {
+        @media (min-width: 900px) {
+            .card-grid {
                 grid-template-columns: repeat(3, 1fr);
+                gap: 0;
+                /* Cards will overlap or touch */
             }
         }
 
-        .model-col h3 {
-            color: var(--color-gold);
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
+        .model-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 3rem 2rem;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
-        .model-col p {
-            color: #d1d5db;
-            /* Light gray for dark background */
+        @media (min-width: 900px) {
+            .model-card:nth-child(2) {
+                transform: translateY(3rem);
+                /* Stagger */
+                background: rgba(255, 255, 255, 0.08);
+                border-left: none;
+                border-right: none;
+            }
+
+            .model-card:nth-child(3) {
+                transform: translateY(6rem);
+                /* Stagger */
+            }
+        }
+
+        .model-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-10px) scale(1.02);
+            z-index: 10;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Reset stagger hover for desktop to avoid jumping */
+        @media (min-width: 900px) {
+            .model-card:nth-child(2):hover {
+                transform: translateY(calc(3rem - 10px)) scale(1.02);
+            }
+
+            .model-card:nth-child(3):hover {
+                transform: translateY(calc(6rem - 10px)) scale(1.02);
+            }
+        }
+
+        .model-card h3 {
+            color: var(--color-gold);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-family: var(--font-display);
+        }
+
+        .model-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        /* AI Section */
+        .ai-section {
+            background-color: var(--color-white);
         }
 
         /* About Section */
         #about {
-            background-color: var(--color-white);
+            background-color: var(--color-sand);
         }
 
-        .founder-block {
+        .founder-container {
+            background: #fff;
+            padding: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            border-radius: 8px;
             display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #e5e7eb;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .founder-container {
+                flex-direction: row;
+                align-items: center;
+            }
         }
 
         .founder-img {
-            width: 80px;
-            height: 80px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background-color: #9ca3af;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.5rem;
-            flex-shrink: 0;
+            object-fit: cover;
+            border: 4px solid var(--color-gold);
         }
 
-        .founder-info h4 {
-            margin-bottom: 0.25rem;
-            color: var(--color-navy);
+        .social-preview {
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .founder-info p {
-            margin-bottom: 0.25rem;
-            font-size: 0.875rem;
-            color: var(--color-text-body);
+        .social-preview:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .founder-info a {
-            font-size: 0.875rem;
-            color: var(--color-gold);
-            font-weight: 600;
-        }
-
-        /* Contact Section */
-        #contact {
-            background-color: var(--color-bg-light);
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--color-white);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--color-navy);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--color-navy);
-            box-shadow: 0 0 0 3px rgba(37, 55, 128, 0.1);
-        }
-
-        .contact-email {
+        /* Testimonial */
+        .testimonial-block {
             text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
+            padding: 4rem 2rem;
+            background: var(--color-navy);
+            color: white;
         }
 
-        .contact-email a {
-            color: var(--color-navy);
-            font-weight: 600;
+        .testimonial-text {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-style: italic;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            color: var(--color-gold);
+            line-height: 1.3;
         }
 
         /* Footer */
         footer {
-            background-color: var(--color-navy);
-            color: #9ca3af;
-            padding: 2rem 0;
+            background-color: var(--color-white);
+            color: var(--color-navy);
+            padding: 4rem 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
             text-align: center;
-            font-size: 0.875rem;
         }
 
         footer p {
-            margin-bottom: 0.5rem;
-            color: #9ca3af;
-        }
-
-        /* Utility */
-        .hidden-mobile {
-            display: none;
-        }
-
-        @media (min-width: 768px) {
-            .hidden-mobile {
-                display: inline;
-            }
+            color: var(--color-text-muted);
         }
     </style>
 </head>
 
 <body>
 
+    <div class="grain-overlay"></div>
+
     <!-- Navigation -->
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">
                 <img src="Metrias Medical _ Horizontal + tagline.png" alt="Metrias Medical Logo"
-                    style="height: 75px; width: auto;">
+                    style="height: 60px; width: auto;">
             </a>
 
-            <!-- Mobile Toggle (placeholder logic) -->
-            <!-- Note: No JS requested unless essential. We can use anchor scrolling for nav. 
-                 Since "hamburger only if essential", and we have 4 items, let's try to fit them or simple stack.
-                 For strict NO JS, we can't do a togglable hamburger easily without checkbox hack.
-                 Given "prefer visible text links if they fit", on mobile we might just show them stacked or smaller.
-                 Let's stick to the request: "No JavaScript unless essential". A mobile menu is often essential. -->
             <div class="mobile-menu-toggle"
-                onclick="document.querySelector('nav ul').style.display = document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex'; document.querySelector('nav ul').style.flexDirection = 'column'; document.querySelector('nav ul').style.position = 'absolute'; document.querySelector('nav ul').style.top = '90px'; document.querySelector('nav ul').style.right = '0'; document.querySelector('nav ul').style.background = 'white'; document.querySelector('nav ul').style.padding = '1rem'; document.querySelector('nav ul').style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)'; document.querySelector('nav ul').style.width = '100%';">
+                onclick="document.querySelector('nav ul').style.display = document.querySelector('nav ul').style.display === 'flex' ? 'none' : 'flex'; document.querySelector('nav ul').style.flexDirection = 'column'; document.querySelector('nav ul').style.position = 'absolute'; document.querySelector('nav ul').style.top = '100%'; document.querySelector('nav ul').style.right = '0'; document.querySelector('nav ul').style.background = 'white'; document.querySelector('nav ul').style.padding = '2rem'; document.querySelector('nav ul').style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)'; document.querySelector('nav ul').style.width = '100%';">
                 ☰
             </div>
 
             <nav>
                 <ul>
-                    <li><a href="#hospitals" class="nav-link-hospital">For Hospitals</a></li>
+                    <li><a href="#hospitals">For Hospitals</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="contact/">Contact</a></li>
+                    <li><a href="contact/" class="btn"
+                            style="padding: 0.5rem 1.5rem; font-size: 0.9rem; margin-left: 1rem; color: var(--color-navy); background: var(--color-gold); box-shadow: none;">Contact</a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -538,79 +665,105 @@
     <!-- SECTION 1: Hero -->
     <section id="hero">
         <div class="container">
-            <h1>Discharge delays are a $100 billion problem. Dashboards won't fix it.</h1>
-            <p class="subhead">
-                Metrias deploys remote expeditors, supported by AI task tracking, to clear the non-clinical bottlenecks
-                that keep patients stuck in beds. We're not software. We're the bandwidth your team doesn't have.
-            </p>
-            <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">Built by a team of healthcare executives
-                with diverse backgrounds.</p>
-            <div class="cta-group">
-                <a href="#hospitals" class="btn">For Hospitals</a>
+            <div class="hero-content">
+                <h1 class="reveal-on-scroll">
+                    Discharge delays are a <span style="color: var(--color-gold);">$100 billion</span> problem.
+                    <br>Dashboards won't fix it.
+                </h1>
+                <p class="subhead reveal-on-scroll delay-100">
+                    Metrias deploys remote expeditors, supported by AI task tracking, to clear the non-clinical
+                    bottlenecks
+                    that keep patients stuck in beds. We're not software. We're the bandwidth your team doesn't have.
+                </p>
+                <div class="reveal-on-scroll delay-200">
+                    <a href="#hospitals" class="btn">For Hospitals</a>
+                    <p style="font-size: 0.9rem; margin-top: 1.5rem; opacity: 0.7; max-width: 400px; line-height: 1.4;">
+                        Built by a team of healthcare executives with diverse backgrounds.
+                    </p>
+                </div>
+
+                <div class="founder-cred reveal-on-scroll delay-300">
+                    Mene Demestihas, MD | Emergency Physician & Founder
+                </div>
             </div>
-            <p class="founder-cred">Founded by Mene Demestihas, MD | Emergency Physician & Health Tech Executive</p>
+
+            <div class="flow-line"></div>
         </div>
     </section>
 
     <!-- SECTION 2: The Problem -->
     <section id="problem" class="section-padding">
-        <div class="container content-block center-text">
-            <h2 class="section-header">The Execution Gap</h2>
-            <p>
-                Hospital case managers are drowning. The average SNF referral acceptance rate hovers around 32%, meaning
-                your team
-                sends an average of 6.6 referrals to place one patient. Prior authorization delays add 2+ days to rehab
-                transfers. The dashboards flag these problems. Nobody has bandwidth to fix them.
-            </p>
-            <p>
-                Existing solutions predict delays. Metrias resolves them. Our expeditors make the follow up calls, chase
-                the authorizations, and grind through rejections until the patient moves. We capture every operational
-                barrier and intervention in structured data, building the attribution layer that proves what worked.
-            </p>
+        <div class="container split-layout">
+            <div class="sticky-header reveal-on-scroll">
+                <h2 class="section-header">The <br>Execution <br>Gap</h2>
+            </div>
+            <div class="content-col reveal-on-scroll delay-100">
+                <div style="margin-bottom: 3rem;">
+                    <div class="stat-highlight">32%</div>
+                    <div class="stat-label">Avg SNF Acceptance Rate</div>
+                </div>
+
+                <p style="font-size: 1.25rem; margin-bottom: 2rem; font-weight: 500; color: var(--color-navy);">
+                    Hospital case managers are drowning. Your team sends an average of 6.6 referrals to place one
+                    patient.
+                </p>
+
+                <p>
+                    Prior authorization delays add 2+ days to rehab transfers. The dashboards flag these problems.
+                    Nobody has bandwidth to fix them.
+                </p>
+                <div style="width: 50px; height: 2px; background: var(--color-gold); margin: 2rem 0;"></div>
+                <p>
+                    Existing solutions predict delays. <strong>Metrias resolves them.</strong> Our expeditors make the
+                    follow up calls, chase
+                    the authorizations, and grind through rejections until the patient moves. We capture every
+                    operational
+                    barrier and intervention in structured data, building the attribution layer that proves what worked.
+                </p>
+            </div>
         </div>
     </section>
 
-
-
     <!-- SECTION 3: For Hospitals -->
     <section id="hospitals" class="section-padding audience-section">
-        <div class="container audience-content">
-            <h2 class="section-header">For Capacity-Constrained Systems</h2>
-            <h3 class="section-subhead">If your ED is boarding admits, every blocked bed costs $14,500 to $20,000 in
-                lost
-                daily revenue from capacity constraints.*</h3>
-            <p style="font-size: 0.8em; margin-top: -10px; margin-bottom: 20px;">*(Reflects opportunity cost of ED
-                boarding and surgical case delays; VanPelt Company 2024)</p>
-            <p>
-                At 85%+ occupancy, discharge delays aren't about saving money. They're about survival. Patients boarding
-                in the ED cost nearly double what they'd cost on the floor. Surgical cases get canceled. Ambulances
-                divert.
-            </p>
-            <p>
-                Metrias provides dedicated expeditor bandwidth to your case management team. We take the non-clinical
-                logistics off their plates: SNF placement calls, transport coordination, DME orders, and prior auth
-                follow-up, so your licensed staff can focus on complex clinical transitions.
-            </p>
-            <div class="proof-points">
-                Pilot methodology validated through mock coordination workflows. Seeking hospital partners for initial
-                deployment.
-                Designed for 200+ bed systems at capacity. Operates alongside your EHR via secure virtual rounding.
-                Integration available for high-volume deployments. US-based nonclinical Expeditors trained in hospital
-                discharge workflows.
-            </div>
-            <p style="margin-top: 2rem;">
-                <strong>Why capacity matters:</strong> Discharge optimization only pencils out when freed beds get
-                refilled.
-                We focus on systems where throughput is the binding constraint—not facilities with empty hallways.
-                Hospitals with excess capacity and high per-diem commercial payer mix may not see ROI from LOS reduction
-                alone.
-                Metrias specifically targets capacity-constrained facilities (85%+ occupancy, ED boarding, ambulance
-                diversion)
-                where throughput directly converts to revenue. This is where the math works for everyone: hospital,
-                patient, and payer.
-            </p>
-            <div style="margin-top: 2rem;">
-                <a href="contact/" class="btn">Discuss a Pilot</a>
+        <div class="container">
+            <div class="split-layout">
+                <div class="reveal-on-scroll">
+                    <h2 class="section-header">For Capacity Constrained Systems</h2>
+                    <p style="font-size: 0.9rem; font-family: var(--font-display); color: var(--color-navy-light);">
+                        TARGET: 85%+ OCCUPANCY
+                    </p>
+                </div>
+
+                <div class="reveal-on-scroll delay-100">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-navy);">
+                        If your ED is boarding admits, every blocked bed costs $14,500 to $20,000 in lost daily revenue.
+                    </h3>
+
+                    <p>
+                        At 85%+ occupancy, discharge delays aren't about saving money. They're about survival. Patients
+                        boarding
+                        in the ED cost nearly double what they'd cost on the floor. Surgical cases get canceled.
+                        Ambulances
+                        divert.
+                    </p>
+                    <p>
+                        Metrias provides dedicated expeditor bandwidth to your case management team. We take the
+                        non-clinical
+                        logistics off their plates: SNF placement calls, transport coordination, DME orders, and prior
+                        auth
+                        follow-up, so your licensed staff can focus on complex clinical transitions.
+                    </p>
+
+                    <div class="proof-points">
+                        "Pilot methodology validated through mock coordination workflows. Seeking hospital partners for
+                        initial deployment."
+                    </div>
+
+                    <div style="margin-top: 3rem;">
+                        <a href="contact/" class="btn">Discuss a Pilot</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -618,20 +771,20 @@
     <!-- SECTION 4: How It Works -->
     <section id="model" class="section-padding">
         <div class="container">
-            <h2 class="section-header">The Model</h2>
-            <div class="grid-3">
-                <div class="model-col">
-                    <h3>Expeditors</h3>
+            <h2 class="section-header reveal-on-scroll" style="text-align: center;">The Model</h2>
+            <div class="card-grid reveal-on-scroll delay-100">
+                <div class="model-card">
+                    <h3>01. Expeditors</h3>
                     <p>Trained nonclinical Expeditors dedicated to discharge logistics. They make the calls your case
                         managers can't get to.</p>
                 </div>
-                <div class="model-col">
-                    <h3>AI Task Engine</h3>
+                <div class="model-card">
+                    <h3>02. AI Task Engine</h3>
                     <p>Every barrier, intervention, and resolution is captured in structured data. We build the audit
                         trail that proves what worked.</p>
                 </div>
-                <div class="model-col">
-                    <h3>Attribution Layer</h3>
+                <div class="model-card">
+                    <h3>03. Attribution Layer</h3>
                     <p>Payer-grade documentation of LOS impact. Designed to survive actuarial scrutiny for shared
                         savings models.</p>
                 </div>
@@ -640,111 +793,124 @@
     </section>
 
     <!-- SECTION 5: AI Behind The Scenes -->
-    <section class="section-padding" style="background-color: var(--color-bg-light);">
-        <div class="container content-block">
-            <h2 class="section-header" style="text-align: center;">AI Behind The Scenes</h2>
-            <p
-                style="text-align: center; font-size: 1.125rem; font-weight: 600; color: var(--color-navy); margin-bottom: 2rem;">
-                Human-first for fast deployment. AI-native for long-term scale.
-            </p>
-            <p>
-                Metrias is designed for immediate adoption with zero IT integration required at launch.
-                Human Expeditors handle all coordination tasks from day one—no complex implementations, no workflow
-                disruptions.
-            </p>
-            <p>
-                Behind the scenes, every interaction generates structured operational data. This data builds the
-                attribution layer
-                that proves intervention impact, creating a foundation that gets smarter with each case.
-            </p>
-            <p>
-                Over time, AI automation increases efficiency without changing the hospital's workflow. The service you
-                see stays
-                the same. The intelligence powering it gets better. Your team gets results faster, with the same level
-                of support.
-            </p>
-        </div>
-    </section>
+    <section class="section-padding ai-section">
+        <div class="container" style="max-width: 900px; text-align: center;">
+            <h2 class="section-header reveal-on-scroll">Human-first for fast deployment.<br> AI-native for scale.</h2>
 
-    <!-- SECTION 6: About / Founder -->
-    <section id="about" class="section-padding">
-        <div class="container content-block">
-            <h2 class="section-header">About Metrias</h2>
-            <p>
-                Metrias Medical was founded to solve a problem seen on every shift in the emergency department: patients
-                ready to leave, stuck waiting for a fax, a callback, a bed that wouldn't open. The dashboards told us
-                what was wrong. Nobody had time to fix it.
-            </p>
-            <p>
-                The literature around hospital throughput is why the service Metrias built is a comprehensive execution
-                layer: we are the bandwidth hospitals need but can't hire, aligned with the payers who actually benefit
-                from efficiency. Metrias works because the patient, the provider and the payers are aligned.
-            </p>
-
-            <div class="founder-block">
-                <img src="headshot.png" alt="Mene Demestihas, MD" class="founder-img"
-                    style="object-fit: cover; border: 2px solid var(--color-navy);">
-                <div class="founder-info">
-                    <h4>Mene Demestihas, MD</h4>
-                    <p style="font-weight: 600; margin-bottom: 0.1rem; color: var(--color-navy);">Founder and CEO</p>
-                    <p>Emergency Physician | Health Tech Executive</p>
-                    <a href="https://linkedin.com/in/menedemestihas" target="_blank">LinkedIn Profile &rarr;</a>
-                </div>
-            </div>
-
-            <!-- Follow the Story -->
-            <div style="margin-top: 4rem; text-align: center;">
-                <h3 style="color: var(--color-navy); margin-bottom: 1.5rem;">Follow the Story</h3>
-
-                <div
-                    style="max-width: 550px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px; overflow: hidden; transition: transform 0.2s ease;">
-                    <a href="https://www.linkedin.com/posts/menedemestihas_healthcareoperations-caretransitions-emergencymedicine-activity-7399882553412972544-61DK"
-                        target="_blank" style="display: block;">
-                        <img src="linkedin_post_preview.png" alt="LinkedIn Post by Mene Demestihas"
-                            style="width: 100%; display: block; height: auto;">
-                    </a>
-                </div>
-                <div style="margin-top: 1rem;">
-                    <a href="https://www.linkedin.com/in/menedemestihas/" target="_blank"
-                        style="font-weight: 600; color: var(--color-navy); font-size: 0.9rem;">View full profile
-                        &rarr;</a>
+            <div class="reveal-on-scroll delay-100" style="text-align: left; columns: 1; gap: 3rem;">
+                <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                    Metrias is designed for immediate adoption with zero IT integration required at launch.
+                    Human Expeditors handle all coordination tasks from day one—no complex implementations.
+                </p>
+                <div style="background: var(--color-sand); padding: 2rem; border-radius: 8px;">
+                    <p style="margin-bottom: 0;">
+                        <strong>The Hidden Value:</strong> Behind the scenes, every interaction generates structured
+                        operational data. This data builds the
+                        attribution layer that proves intervention impact, creating a foundation that gets smarter with
+                        each case.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonial -->
-    <section class="section-padding" style="background-color: var(--color-bg-light); text-align: center;">
-        <div class="container">
-            <blockquote
-                style="font-size: 1.25rem; font-style: italic; color: var(--color-navy); max-width: 800px; margin: 0 auto; border: none; padding: 0;">
+    <section class="testimonial-block">
+        <div class="container reveal-on-scroll">
+            <blockquote class="testimonial-text">
                 "Having someone handle the discharge logistics would be a game-changer on my shift."
             </blockquote>
-            <p style="margin-top: 1rem; font-weight: 600;">— Hospitalist, Pilot Validation</p>
+            <p style="opacity: 0.8;">— Hospitalist, Pilot Validation</p>
         </div>
     </section>
 
-    <!-- Why Now -->
-    <section class="section-padding" style="background-color: white; text-align: center;">
-        <div class="container content-block">
-            <h2 class="section-header">Why Now</h2>
-            <p style="max-width: 800px; margin: 0 auto;">
-                CMS readmission penalties, payer LOS scrutiny, and post-pandemic capacity constraints have made
-                discharge velocity a C-suite priority.
-            </p>
+    <!-- SECTION 6: About / Founder -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="split-layout">
+                <div class="reveal-on-scroll">
+                    <h2 class="section-header">About <br>Metrias</h2>
+                </div>
+                <div class="reveal-on-scroll delay-100">
+                    <p>
+                        Metrias Medical was founded to solve a problem seen on every shift in the emergency department:
+                        patients
+                        ready to leave, stuck waiting for a fax, a callback, a bed that wouldn't open. The dashboards
+                        told us
+                        what was wrong. Nobody had time to fix it.
+                    </p>
+
+                    <div class="founder-container">
+                        <img src="headshot.png" alt="Mene Demestihas, MD" class="founder-img">
+                        <div class="founder-info">
+                            <h4>Mene Demestihas, MD</h4>
+                            <p
+                                style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                                Founder and CEO</p>
+                            <p style="margin-bottom: 1rem;">Emergency Physician | Health Tech Executive</p>
+                            <a href="https://linkedin.com/in/menedemestihas" target="_blank"
+                                style="color: var(--color-navy); border-bottom: 1px solid var(--color-gold);">LinkedIn
+                                Profile &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 4rem;">
+                        <h3 style="font-size: 1.25rem;">Follow the Story</h3>
+                        <a href="https://www.linkedin.com/posts/menedemestihas_healthcareoperations-caretransitions-emergencymedicine-activity-7399882553412972544-61DK"
+                            target="_blank" class="social-preview"
+                            style="display: block; border-radius: 8px; overflow: hidden;">
+                            <img src="linkedin_post_preview.png" alt="LinkedIn Post" style="width: 100%;">
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-
-
 
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Metrias Medical</p>
-            <p style="font-size: 0.75rem;">Metrias Medical is the execution layer for hospital discharge.</p>
-            <p style="font-size: 0.75rem; margin-top: 5px;">HIPAA-compliant. US-based operations.</p>
+            <div style="margin-bottom: 2rem;">
+                <img src="Metrias Medical _ Horizontal + tagline.png" alt="Metrias Medical"
+                    style="height: 40px; margin: 0 auto; filter: grayscale(1); opacity: 0.5;">
+            </div>
+            <p>&copy; 2025 Metrias Medical. <br>The execution layer for hospital discharge.</p>
+            <p style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.6;">HIPAA-compliant. US-based operations.</p>
         </div>
     </footer>
+
+    <script>
+        // Reveal on Scroll Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach((element) => {
+            observer.observe(element);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+
 </body>
 
 </html>
