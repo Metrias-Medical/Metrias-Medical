@@ -529,7 +529,7 @@
                 <ul>
                     <li><a href="#hospitals" class="nav-link-hospital">For Hospitals</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="contact/">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -610,7 +610,7 @@
                 patient, and payer.
             </p>
             <div style="margin-top: 2rem;">
-                <a href="#contact" class="btn">Discuss a Pilot</a>
+                <a href="contact/" class="btn">Discuss a Pilot</a>
             </div>
         </div>
     </section>
@@ -735,37 +735,7 @@
         </div>
     </section>
 
-    <!-- SECTION 7: Contact -->
-    <section id="contact" class="section-padding">
-        <div class="container">
-            <div class="contact-form">
-                <h2 class="section-header" style="margin-bottom: 1.5rem; text-align: center;">Start a Conversation</h2>
-                <form id="contact-form" onsubmit="event.preventDefault(); sendMail();">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="interest">I'm interested in...</label>
-                        <select id="interest" name="interest" class="form-control">
-                            <option value="Hospital Operations">Hospital Operations</option>
-                            <option value="Partnership">Partnership</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-full-width">Send</button>
 
-                    <div class="contact-email">
-                        Or email directly: <a href="mailto:connect@metriasmedical.com">connect@metriasmedical.com</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer>
@@ -775,20 +745,6 @@
             <p style="font-size: 0.75rem; margin-top: 5px;">HIPAA-compliant. US-based operations.</p>
         </div>
     </footer>
-
-    <script>
-        function sendMail() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const interest = document.getElementById('interest').value;
-
-            const subject = `Metrias Inquiry — ${interest}`;
-            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AInterest: ${interest}%0D%0A%0D%0A(Add your message here)`;
-
-            window.location.href = `mailto:connect@metriasmedical.com?subject=${subject}&body=${body}`;
-        }
-    </script>
-
 </body>
 
 </html>
