@@ -7,7 +7,7 @@
     <title>Metrias Medical | The Execution Layer for Hospital Discharge</title>
     <meta name="description"
         content="Metrias Medical provides dedicated expeditors and AI task tracking to solve hospital discharge delays. We are the bandwidth your team doesn't have.">
-    <link rel="icon" type="image/svg+xml" href="assets/branding/favicon_universal.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/branding/favicon.svg">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -134,7 +134,8 @@
             }
 
             h1 {
-                font-size: 4.5rem; /* Larger hero type */
+                font-size: 4.5rem;
+                /* Larger hero type */
                 letter-spacing: -0.04em;
                 line-height: 1;
             }
@@ -147,9 +148,9 @@
         /* FIX 3: Global Textures for White Sections */
         .section-white-texture {
             background-color: #fafafa;
-            background-image: 
-                linear-gradient(135deg, transparent 74%, rgba(26,43,74,0.02) 75%),
-                linear-gradient(45deg, transparent 74%, rgba(26,43,74,0.02) 75%);
+            background-image:
+                linear-gradient(135deg, transparent 74%, rgba(26, 43, 74, 0.02) 75%),
+                linear-gradient(45deg, transparent 74%, rgba(26, 43, 74, 0.02) 75%);
             background-size: 60px 60px;
         }
 
@@ -475,12 +476,15 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         /* Subtle Navy Texture */
         #model::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
             background-size: 40px 40px;
             opacity: 0.5;
@@ -492,16 +496,18 @@
             z-index: 2;
             max-width: 1000px;
             margin: 0 auto;
-            padding-left: 2rem; /* Space for mobile line */
+            padding-left: 2rem;
+            /* Space for mobile line */
         }
-        
+
         /* The Connecting Line (Vertical on mobile) */
         .model-flow::before {
             content: '';
             position: absolute;
             top: 0;
             bottom: 0;
-            left: 0; /* Align left for mobile */
+            left: 0;
+            /* Align left for mobile */
             width: 2px;
             background: linear-gradient(to bottom, var(--color-gold) 0%, rgba(222, 172, 49, 0.2) 100%);
         }
@@ -509,7 +515,7 @@
         .model-step {
             position: relative;
             margin-bottom: 5rem;
-            padding-left: 3rem; 
+            padding-left: 3rem;
         }
 
         .model-step:last-child {
@@ -518,7 +524,8 @@
 
         .step-marker {
             position: absolute;
-            left: -19px; /* Align with line */
+            left: -19px;
+            /* Align with line */
             top: 0;
             width: 40px;
             height: 40px;
@@ -532,7 +539,8 @@
             font-weight: 700;
             color: var(--color-gold);
             z-index: 2;
-            box-shadow: 0 0 0 8px var(--color-navy); /* Gap effect */
+            box-shadow: 0 0 0 8px var(--color-navy);
+            /* Gap effect */
         }
 
         .step-content h3 {
@@ -540,9 +548,9 @@
             color: var(--color-gold);
             margin-bottom: 1rem;
         }
-        
+
         .step-content p {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1.1rem;
         }
 
@@ -558,8 +566,12 @@
 
             .model-flow::before {
                 /* Horizontal Line */
-                left: 0; right: 0; top: 20px; bottom: auto;
-                width: 100%; height: 2px;
+                left: 0;
+                right: 0;
+                top: 20px;
+                bottom: auto;
+                width: 100%;
+                height: 2px;
                 background: linear-gradient(90deg, var(--color-gold) 0%, rgba(222, 172, 49, 0.2) 100%);
             }
 
@@ -567,7 +579,8 @@
                 padding-left: 0;
                 margin-bottom: 0;
                 flex: 1;
-                padding-top: 4rem; /* Space for marker */
+                padding-top: 4rem;
+                /* Space for marker */
                 text-align: center;
             }
 
@@ -576,7 +589,7 @@
                 top: 0;
                 transform: translateX(-50%);
             }
-            
+
             .step-content p {
                 margin: 0 auto;
             }
@@ -623,9 +636,9 @@
             background: white;
             border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             margin-top: 3rem;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease;
             text-align: left;
         }
@@ -642,7 +655,8 @@
         }
 
         .sp-avatar {
-            width: 60px; height: 60px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--color-gold);
@@ -650,16 +664,21 @@
         }
 
         .sp-meta h4 {
-            font-size: 1rem; margin: 0; color: var(--color-navy);
+            font-size: 1rem;
+            margin: 0;
+            color: var(--color-navy);
         }
-        
+
         .sp-meta span {
-            font-size: 0.85rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .sp-quote {
             font-family: var(--font-display);
-            font-size: 1.25rem; 
+            font-size: 1.25rem;
             line-height: 1.5;
             color: var(--color-navy);
             margin-bottom: 1.5rem;
@@ -667,7 +686,7 @@
         }
 
         .sp-stats {
-            border-top: 1px solid rgba(0,0,0,0.05);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
             padding-top: 1rem;
             font-size: 0.85rem;
             color: var(--color-text-muted);
@@ -716,7 +735,7 @@
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">
-                <img src="assets/branding/Metrias Medical _ Horizontal + tagline.png" alt="Metrias Medical Logo"
+                <img src="assets/branding/metrias-logo-horizontal.png" alt="Metrias Medical Logo"
                     style="height: 60px; width: auto;">
             </a>
 
@@ -847,14 +866,15 @@
     <section id="model" class="section-padding">
         <div class="container">
             <h2 class="section-header reveal-on-scroll" style="text-align: center; margin-bottom: 6rem;">The Model</h2>
-            
+
             <div class="model-flow reveal-on-scroll delay-100">
                 <!-- Step 1 -->
                 <div class="model-step">
                     <div class="step-marker">01</div>
                     <div class="step-content">
                         <h3>Expeditors</h3>
-                        <p>Trained nonclinical Expeditors dedicated to discharge logistics. They make the calls your case managers can't get to.</p>
+                        <p>Trained nonclinical Expeditors dedicated to discharge logistics. They make the calls your
+                            case managers can't get to.</p>
                     </div>
                 </div>
 
@@ -863,7 +883,8 @@
                     <div class="step-marker">02</div>
                     <div class="step-content">
                         <h3>AI Task Engine</h3>
-                        <p>Every barrier, intervention, and resolution is captured in structured data, building the audit trail that proves what worked.</p>
+                        <p>Every barrier, intervention, and resolution is captured in structured data, building the
+                            audit trail that proves what worked.</p>
                     </div>
                 </div>
 
@@ -872,7 +893,8 @@
                     <div class="step-marker">03</div>
                     <div class="step-content">
                         <h3>Attribution</h3>
-                        <p>Payer-grade documentation of LOS impact. Designed to survive actuarial scrutiny for shared savings models.</p>
+                        <p>Payer-grade documentation of LOS impact. Designed to survive actuarial scrutiny for shared
+                            savings models.</p>
                     </div>
                 </div>
             </div>
@@ -943,9 +965,10 @@
 
                     <div style="margin-top: 4rem;">
                         <h3 style="font-size: 1.25rem;">Follow the Story</h3>
-                        
+
                         <!-- FIX 1: Designed Social Proof Card -->
-                        <a href="https://www.linkedin.com/posts/menedemestihas_healthcareoperations-caretransitions-emergencymedicine-activity-7399882553412972544-61DK" target="_blank" style="text-decoration: none;">
+                        <a href="https://www.linkedin.com/posts/menedemestihas_healthcareoperations-caretransitions-emergencymedicine-activity-7399882553412972544-61DK"
+                            target="_blank" style="text-decoration: none;">
                             <div class="social-proof-card reveal-on-scroll delay-200">
                                 <div class="sp-header">
                                     <img src="assets/branding/headshot.png" alt="Mene Demestihas" class="sp-avatar">
@@ -974,7 +997,7 @@
     <footer>
         <div class="container">
             <div style="margin-bottom: 2rem;">
-                <img src="assets/branding/Metrias Medical _ Horizontal + tagline.png" alt="Metrias Medical"
+                <img src="assets/branding/metrias-logo-horizontal.png" alt="Metrias Medical"
                     style="height: 40px; margin: 0 auto; filter: grayscale(1); opacity: 0.5;">
             </div>
             <p>&copy; 2025 Metrias Medical. <br>The execution layer for hospital discharge.</p>
