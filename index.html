@@ -7,7 +7,7 @@
     <title>Metrias Medical | The Execution Layer for Hospital Discharge</title>
     <meta name="description"
         content="Metrias Medical provides dedicated expeditors and AI task tracking to solve hospital discharge delays. We are the bandwidth your team doesn't have.">
-    <link rel="icon" type="image/svg+xml" href="favicon_universal.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/branding/favicon_universal.svg">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -23,13 +23,12 @@
     <meta property="twitter:title" content="Metrias Medical | Hospital Discharge Solutions">
     <meta property="twitter:description"
         content="Discharge delays are a $100 billion problem. Metrias deploys remote expeditors to clear non-clinical bottlenecks.">
-    <meta property="twitter:image" content="https://metriasmedical.com/og-image.png">
-
-    <!-- Fonts -->
+    <meta property="twitter:image" content="https://metriasmedical.com/assets/branding/og-image.png">
+    <!-- Fonts: Upgraded to Fraunces (Display) and DM Sans (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Fraunces:opsz,wght@9..144,300;400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Fraunces:opsz,wght@9..144,300;400;600;700;800;900&display=swap"
         rel="stylesheet">
 
     <style>
@@ -135,13 +134,23 @@
             }
 
             h1 {
-                font-size: 4rem;
-                letter-spacing: -0.03em;
+                font-size: 4.5rem; /* Larger hero type */
+                letter-spacing: -0.04em;
+                line-height: 1;
             }
 
             h2 {
-                font-size: 3.5rem;
+                font-size: 3rem;
             }
+        }
+
+        /* FIX 3: Global Textures for White Sections */
+        .section-white-texture {
+            background-color: #fafafa;
+            background-image: 
+                linear-gradient(135deg, transparent 74%, rgba(26,43,74,0.02) 75%),
+                linear-gradient(45deg, transparent 74%, rgba(26,43,74,0.02) 75%);
+            background-size: 60px 60px;
         }
 
         /* Texture Overlay */
@@ -459,101 +468,121 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
-        /* The Model Section */
+        /* FIX 2: The Model - Timeline Flow */
         #model {
             background-color: var(--color-navy);
             color: var(--color-white);
             position: relative;
             overflow: hidden;
         }
-
-        /* Subtle topo map or geometric texture */
+        
+        /* Subtle Navy Texture */
         #model::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 30px 30px;
-            opacity: 0.3;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+            opacity: 0.5;
             pointer-events: none;
         }
 
-        #model .section-header {
-            color: var(--color-white);
-            margin-bottom: 4rem;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
+        .model-flow {
             position: relative;
             z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-left: 2rem; /* Space for mobile line */
+        }
+        
+        /* The Connecting Line (Vertical on mobile) */
+        .model-flow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0; /* Align left for mobile */
+            width: 2px;
+            background: linear-gradient(to bottom, var(--color-gold) 0%, rgba(222, 172, 49, 0.2) 100%);
         }
 
-        @media (min-width: 900px) {
-            .card-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 0;
-                /* Cards will overlap or touch */
-            }
+        .model-step {
+            position: relative;
+            margin-bottom: 5rem;
+            padding-left: 3rem; 
         }
 
-        .model-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 3rem 2rem;
-            transition: transform 0.3s ease, background 0.3s ease;
+        .model-step:last-child {
+            margin-bottom: 0;
         }
 
-        @media (min-width: 900px) {
-            .model-card:nth-child(2) {
-                transform: translateY(3rem);
-                /* Stagger */
-                background: rgba(255, 255, 255, 0.08);
-                border-left: none;
-                border-right: none;
-            }
-
-            .model-card:nth-child(3) {
-                transform: translateY(6rem);
-                /* Stagger */
-            }
-        }
-
-        .model-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-10px) scale(1.02);
-            z-index: 10;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Reset stagger hover for desktop to avoid jumping */
-        @media (min-width: 900px) {
-            .model-card:nth-child(2):hover {
-                transform: translateY(calc(3rem - 10px)) scale(1.02);
-            }
-
-            .model-card:nth-child(3):hover {
-                transform: translateY(calc(6rem - 10px)) scale(1.02);
-            }
-        }
-
-        .model-card h3 {
-            color: var(--color-gold);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+        .step-marker {
+            position: absolute;
+            left: -19px; /* Align with line */
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--color-navy);
+            border: 2px solid var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-family: var(--font-display);
+            font-weight: 700;
+            color: var(--color-gold);
+            z-index: 2;
+            box-shadow: 0 0 0 8px var(--color-navy); /* Gap effect */
         }
 
-        .model-card p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1rem;
+        .step-content h3 {
+            font-size: 2rem;
+            color: var(--color-gold);
+            margin-bottom: 1rem;
         }
+        
+        .step-content p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+        }
+
+        /* Desktop Timeline Layout */
+        @media (min-width: 900px) {
+            .model-flow {
+                padding-left: 0;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                gap: 2rem;
+            }
+
+            .model-flow::before {
+                /* Horizontal Line */
+                left: 0; right: 0; top: 20px; bottom: auto;
+                width: 100%; height: 2px;
+                background: linear-gradient(90deg, var(--color-gold) 0%, rgba(222, 172, 49, 0.2) 100%);
+            }
+
+            .model-step {
+                padding-left: 0;
+                margin-bottom: 0;
+                flex: 1;
+                padding-top: 4rem; /* Space for marker */
+                text-align: center;
+            }
+
+            .step-marker {
+                left: 50%;
+                top: 0;
+                transform: translateX(-50%);
+            }
+            
+            .step-content p {
+                margin: 0 auto;
+            }
+        }
+
+
 
         /* AI Section */
         .ai-section {
@@ -590,14 +619,60 @@
             border: 4px solid var(--color-gold);
         }
 
-        .social-preview {
+        .social-proof-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-top: 3rem;
+            border: 1px solid rgba(0,0,0,0.05);
             transition: transform 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: left;
         }
 
-        .social-preview:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        .social-proof-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(37, 55, 128, 0.15);
+        }
+
+        .sp-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .sp-avatar {
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--color-gold);
+            margin-right: 1rem;
+        }
+
+        .sp-meta h4 {
+            font-size: 1rem; margin: 0; color: var(--color-navy);
+        }
+        
+        .sp-meta span {
+            font-size: 0.85rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em;
+        }
+
+        .sp-quote {
+            font-family: var(--font-display);
+            font-size: 1.25rem; 
+            line-height: 1.5;
+            color: var(--color-navy);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .sp-stats {
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 1rem;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            display: flex;
+            gap: 1.5rem;
         }
 
         /* Testimonial */
@@ -641,7 +716,7 @@
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">
-                <img src="Metrias Medical _ Horizontal + tagline.png" alt="Metrias Medical Logo"
+                <img src="assets/branding/Metrias Medical _ Horizontal + tagline.png" alt="Metrias Medical Logo"
                     style="height: 60px; width: auto;">
             </a>
 
@@ -692,7 +767,7 @@
     </section>
 
     <!-- SECTION 2: The Problem -->
-    <section id="problem" class="section-padding">
+    <section id="problem" class="section-padding section-white-texture">
         <div class="container split-layout">
             <div class="sticky-header reveal-on-scroll">
                 <h2 class="section-header">The <br>Execution <br>Gap</h2>
@@ -771,29 +846,41 @@
     <!-- SECTION 4: How It Works -->
     <section id="model" class="section-padding">
         <div class="container">
-            <h2 class="section-header reveal-on-scroll" style="text-align: center;">The Model</h2>
-            <div class="card-grid reveal-on-scroll delay-100">
-                <div class="model-card">
-                    <h3>01. Expeditors</h3>
-                    <p>Trained nonclinical Expeditors dedicated to discharge logistics. They make the calls your case
-                        managers can't get to.</p>
+            <h2 class="section-header reveal-on-scroll" style="text-align: center; margin-bottom: 6rem;">The Model</h2>
+            
+            <div class="model-flow reveal-on-scroll delay-100">
+                <!-- Step 1 -->
+                <div class="model-step">
+                    <div class="step-marker">01</div>
+                    <div class="step-content">
+                        <h3>Expeditors</h3>
+                        <p>Trained nonclinical Expeditors dedicated to discharge logistics. They make the calls your case managers can't get to.</p>
+                    </div>
                 </div>
-                <div class="model-card">
-                    <h3>02. AI Task Engine</h3>
-                    <p>Every barrier, intervention, and resolution is captured in structured data. We build the audit
-                        trail that proves what worked.</p>
+
+                <!-- Step 2 -->
+                <div class="model-step">
+                    <div class="step-marker">02</div>
+                    <div class="step-content">
+                        <h3>AI Task Engine</h3>
+                        <p>Every barrier, intervention, and resolution is captured in structured data, building the audit trail that proves what worked.</p>
+                    </div>
                 </div>
-                <div class="model-card">
-                    <h3>03. Attribution Layer</h3>
-                    <p>Payer-grade documentation of LOS impact. Designed to survive actuarial scrutiny for shared
-                        savings models.</p>
+
+                <!-- Step 3 -->
+                <div class="model-step">
+                    <div class="step-marker">03</div>
+                    <div class="step-content">
+                        <h3>Attribution</h3>
+                        <p>Payer-grade documentation of LOS impact. Designed to survive actuarial scrutiny for shared savings models.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SECTION 5: AI Behind The Scenes -->
-    <section class="section-padding ai-section">
+    <section class="section-padding ai-section section-white-texture">
         <div class="container" style="max-width: 900px; text-align: center;">
             <h2 class="section-header reveal-on-scroll">Human-first for fast deployment.<br> AI-native for scale.</h2>
 
@@ -841,7 +928,7 @@
                     </p>
 
                     <div class="founder-container">
-                        <img src="headshot.png" alt="Mene Demestihas, MD" class="founder-img">
+                        <img src="assets/branding/headshot.png" alt="Mene Demestihas, MD" class="founder-img">
                         <div class="founder-info">
                             <h4>Mene Demestihas, MD</h4>
                             <p
@@ -856,10 +943,26 @@
 
                     <div style="margin-top: 4rem;">
                         <h3 style="font-size: 1.25rem;">Follow the Story</h3>
-                        <a href="https://www.linkedin.com/posts/menedemestihas_healthcareoperations-caretransitions-emergencymedicine-activity-7399882553412972544-61DK"
-                            target="_blank" class="social-preview"
-                            style="display: block; border-radius: 8px; overflow: hidden;">
-                            <img src="linkedin_post_preview.png" alt="LinkedIn Post" style="width: 100%;">
+                        
+                        <!-- FIX 1: Designed Social Proof Card -->
+                        <a href="https://www.linkedin.com/posts/menedemestihas_healthcareoperations-caretransitions-emergencymedicine-activity-7399882553412972544-61DK" target="_blank" style="text-decoration: none;">
+                            <div class="social-proof-card reveal-on-scroll delay-200">
+                                <div class="sp-header">
+                                    <img src="assets/branding/headshot.png" alt="Mene Demestihas" class="sp-avatar">
+                                    <div class="sp-meta">
+                                        <h4>Mene Demestihas, MD</h4>
+                                        <span>Emergency Physician</span>
+                                    </div>
+                                </div>
+                                <div class="sp-quote">
+                                    "We cannot solve a logistics problem with clinical bandwidth."
+                                </div>
+                                <div class="sp-stats">
+                                    <span>❤️ 640+ Reactions</span>
+                                    <span>💬 110+ Comments</span>
+                                    <span>↗ View on LinkedIn</span>
+                                </div>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -871,7 +974,7 @@
     <footer>
         <div class="container">
             <div style="margin-bottom: 2rem;">
-                <img src="Metrias Medical _ Horizontal + tagline.png" alt="Metrias Medical"
+                <img src="assets/branding/Metrias Medical _ Horizontal + tagline.png" alt="Metrias Medical"
                     style="height: 40px; margin: 0 auto; filter: grayscale(1); opacity: 0.5;">
             </div>
             <p>&copy; 2025 Metrias Medical. <br>The execution layer for hospital discharge.</p>
