@@ -145,6 +145,14 @@
             }
         }
 
+        /* FIX 6: Performance Optimization */
+        .grain-overlay,
+        .reveal-on-scroll {
+            will-change: transform, opacity;
+            transform: translate3d(0, 0, 0);
+            /* Force GPU */
+        }
+
         /* FIX 3: Global Textures for White Sections */
         .section-white-texture {
             background-color: #fafafa;
@@ -279,6 +287,8 @@
             font-weight: 500;
             color: var(--color-navy);
             position: relative;
+            padding: 12px 0;
+            /* FIX 4: Mobile Touch Target Size */
         }
 
         nav a::after {
@@ -338,6 +348,11 @@
             mask-image: linear-gradient(to left, black, transparent);
             -webkit-mask-image: linear-gradient(to left, black, transparent);
             z-index: 0;
+            /* FIX 1: distinctive medical/data abstract background */
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(222, 172, 49, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(222, 172, 49, 0.05) 0%, transparent 20%),
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 40px);
         }
 
         /* The "Flow" Element */
@@ -430,6 +445,13 @@
             .sticky-header {
                 position: sticky;
                 top: 8rem;
+            }
+        }
+
+        /* FIX 4: Mobile sticky fix */
+        @media (max-width: 899px) {
+            .sticky-header {
+                position: static !important;
             }
         }
 
@@ -541,6 +563,13 @@
             z-index: 2;
             box-shadow: 0 0 0 8px var(--color-navy);
             /* Gap effect */
+        }
+
+        /* FIX 3: Icons in Markers */
+        .step-marker svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--color-gold);
         }
 
         .step-content h3 {
@@ -770,7 +799,7 @@
                     that keep patients stuck in beds. We're not software. We're the bandwidth your team doesn't have.
                 </p>
                 <div class="reveal-on-scroll delay-200">
-                    <a href="#hospitals" class="btn">For Hospitals</a>
+                    <a href="#model" class="btn">See How It Works</a>
                     <p style="font-size: 0.9rem; margin-top: 1.5rem; opacity: 0.7; max-width: 400px; line-height: 1.4;">
                         Built by a team of healthcare executives with diverse backgrounds.
                     </p>
@@ -782,6 +811,31 @@
             </div>
 
             <div class="flow-line"></div>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- FIX 2: Social Proof (Earlier) -->
+    <section class="section-padding" style="background: white; padding: 4rem 0;">
+        <div class="container reveal-on-scroll">
+            <div class="social-proof-card"
+                style="margin-top: 0; max-width: 800px; margin: 0 auto; border: 1px solid var(--color-gold);">
+                <div class="sp-header">
+                    <img src="assets/branding/headshot.png" alt="Mene Demestihas" class="sp-avatar">
+                    <div class="sp-meta">
+                        <h4>Mene Demestihas, MD</h4>
+                        <span>Emergency Physician</span>
+                    </div>
+                </div>
+                <div class="sp-quote">
+                    "We cannot solve a logistics problem with clinical bandwidth. We need a dedicated execution layer."
+                </div>
+                <div class="sp-stats">
+                    <span style="color: var(--color-navy); font-weight: 700;">TRUSTED BY LEADERS IN EMERGENCY
+                        MEDICINE</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -870,35 +924,58 @@
             <div class="model-flow reveal-on-scroll delay-100">
                 <!-- Step 1 -->
                 <div class="model-step">
-                    <div class="step-marker">01</div>
-                    <div class="step-content">
-                        <h3>Expeditors</h3>
-                        <p>Trained nonclinical Expeditors dedicated to discharge logistics. They make the calls your
-                            case managers can't get to.</p>
+                    <div class="model-step">
+                        <div class="step-marker">
+                            <!-- Headset Icon -->
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3V10a9 9 0 0 0-9-9z" />
+                            </svg>
+                        </div>
+                        <div class="step-content">
+                            <h3>Expeditors</h3>
+                            <p>Trained nonclinical Expeditors dedicated to discharge logistics. They make the calls your
+                                case managers can't get to.</p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Step 2 -->
-                <div class="model-step">
-                    <div class="step-marker">02</div>
-                    <div class="step-content">
-                        <h3>AI Task Engine</h3>
-                        <p>Every barrier, intervention, and resolution is captured in structured data, building the
-                            audit trail that proves what worked.</p>
-                    </div>
-                </div>
+                    <!-- Step 2 -->
+                    <div class="model-step">
+                        <div class="model-step">
+                            <div class="step-marker">
+                                <!-- Brain/Tasks Icon -->
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
+                                </svg>
+                            </div>
+                            <div class="step-content">
+                                <h3>AI Task Engine</h3>
+                                <p>Every barrier, intervention, and resolution is captured in structured data, building
+                                    the
+                                    audit trail that proves what worked.</p>
+                            </div>
+                        </div>
 
-                <!-- Step 3 -->
-                <div class="model-step">
-                    <div class="step-marker">03</div>
-                    <div class="step-content">
-                        <h3>Attribution</h3>
-                        <p>Payer-grade documentation of LOS impact. Designed to survive actuarial scrutiny for shared
-                            savings models.</p>
+                        <!-- Step 3 -->
+                        <div class="model-step">
+                            <div class="model-step">
+                                <div class="step-marker">
+                                    <!-- Chart Icon -->
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2v-3h2v3zm4 0h-2v-5h2v5z" />
+                                    </svg>
+                                </div>
+                                <div class="step-content">
+                                    <h3>Attribution</h3>
+                                    <p>Payer-grade documentation of LOS impact. Designed to survive actuarial scrutiny
+                                        for shared
+                                        savings models.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <!-- SECTION 5: AI Behind The Scenes -->
@@ -963,45 +1040,43 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 4rem;">
-                        <h3 style="font-size: 1.25rem;">Follow the Story</h3>
 
-                        <!-- FIX 1: Designed Social Proof Card -->
-                        <a href="https://www.linkedin.com/posts/menedemestihas_healthcareoperations-caretransitions-emergencymedicine-activity-7399882553412972544-61DK"
-                            target="_blank" style="text-decoration: none;">
-                            <div class="social-proof-card reveal-on-scroll delay-200">
-                                <div class="sp-header">
-                                    <img src="assets/branding/headshot.png" alt="Mene Demestihas" class="sp-avatar">
-                                    <div class="sp-meta">
-                                        <h4>Mene Demestihas, MD</h4>
-                                        <span>Emergency Physician</span>
-                                    </div>
-                                </div>
-                                <div class="sp-quote">
-                                    "We cannot solve a logistics problem with clinical bandwidth."
-                                </div>
-                                <div class="sp-stats">
-                                    <span>❤️ 640+ Reactions</span>
-                                    <span>💬 110+ Comments</span>
-                                    <span>↗ View on LinkedIn</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
+    <!-- FIX 5: Expanded Footer -->
     <footer>
         <div class="container">
-            <div style="margin-bottom: 2rem;">
-                <img src="assets/branding/metrias-logo-horizontal.png" alt="Metrias Medical"
-                    style="height: 40px; margin: 0 auto; filter: grayscale(1); opacity: 0.5;">
+            <div class="split-layout" style="align-items: center; gap: 2rem; margin-bottom: 3rem; text-align: left;">
+                <div>
+                    <img src="assets/branding/metrias-logo-horizontal.png" alt="Metrias Medical"
+                        style="height: 40px; margin-bottom: 1rem; filter: grayscale(1); opacity: 0.5;">
+                    <p style="font-size: 0.9rem; max-width: 300px;">
+                        The execution layer for hospital discharge. We provide the bandwidth your team needs to flow
+                        patients.
+                    </p>
+                </div>
+                <div style="display: flex; gap: 4rem;">
+                    <div>
+                        <h5
+                            style="color: var(--color-navy); margin-bottom: 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                            Company</h5>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem;"><a href="#hospitals">For Hospitals</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="#about">About</a></li>
+                            <li style="margin-bottom: 0.5rem;"><a href="contact/">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <p>&copy; 2025 Metrias Medical. <br>The execution layer for hospital discharge.</p>
-            <p style="font-size: 0.75rem; margin-top: 1rem; opacity: 0.6;">HIPAA-compliant. US-based operations.</p>
+            <div
+                style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 2rem; display: flex; justify-content: space-between; flex-wrap: wrap;">
+                <p style="font-size: 0.75rem; opacity: 0.6;">&copy; 2025 Metrias Medical. All rights reserved.</p>
+                <p style="font-size: 0.75rem; opacity: 0.6;">HIPAA-compliant. US-based operations.</p>
+            </div>
         </div>
     </footer>
 
